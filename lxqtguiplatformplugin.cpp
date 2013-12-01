@@ -49,6 +49,8 @@ LxQtGuiPlatformPlugin::LxQtGuiPlatformPlugin() {
 
   QByteArray line = file.readLine();
   iconThemeName = line.simplified();
+
+  file.close()
 }
 
 LxQtGuiPlatformPlugin::~LxQtGuiPlatformPlugin() {
