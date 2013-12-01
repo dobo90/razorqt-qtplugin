@@ -3,13 +3,13 @@ change icon theme in Qt4 applications in RazorQt environtment
 
 To compile it, invoke:
 cmake ../ -DCMAKE_INSTALL_PREFIX=/usr
-(in distributions <like Arch Linux> defaulting Qt5 instead of Qt4 add moreover
- -DQT_QMAKE_EXECUTABLE=qmake-qt4)
+(in distributions <like Arch Linux> defaulting Qt5 instead of Qt4
+add moreover -DQT_QMAKE_EXECUTABLE=qmake-qt4)
 make install
 
 Bear in mind it's a minimalistic workaround. To get it working do
 following steps:
-1) echo "your-theme-name" >> ~/.razorqt_icontheme
+1) echo "your-theme-name" > ~/.razorqt_icontheme
 "your-theme-name" could be for example " Faience-Azur
 2) Add following environtment variable in RazorQt session settings:
 QT_PLATFORM_PLUGIN=razorqt
