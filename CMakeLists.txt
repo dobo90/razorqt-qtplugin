@@ -9,8 +9,8 @@ project(lxqt-qtplugin)
 find_package(Qt4 4.6 REQUIRED QtCore QtGui)
 include(${QT_USE_FILE})
 
-find_package(LxQt REQUIRED)
-include(${LXQT_USE_FILE})
+#find_package(LxQt REQUIRED)
+#include(${LXQT_USE_FILE})
 
 if (CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -Wl,-no-undefined -Wall")
@@ -21,7 +21,7 @@ set(CMAKE_AUTOMOC TRUE)
 
 include_directories(
   ${QT_INCLUDES}
-  ${LXQT_INCLUDE_DIRS}
+  #${LXQT_INCLUDE_DIRS}
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}
 )
@@ -32,12 +32,12 @@ set(qtlxqt_SRCS
   qguiplatformplugin_p.h
 )
 
-add_library(qtlxqt SHARED ${qtlxqt_SRCS})
+add_library(qtrazorqt SHARED ${qtlxqt_SRCS})
 
-target_link_libraries(qtlxqt
+target_link_libraries(qtrazorqt
   ${QT_QTCORE_LIBRARY}
   ${QT_QTGUI_LIBRARY}
-  ${LXQT_LIBRARIES}
+  #${LXQT_LIBRARIES}
 )
 
-install (TARGETS qtlxqt LIBRARY DESTINATION ${QT_PLUGINS_DIR}/gui_platform)
+install (TARGETS qtrazorqt LIBRARY DESTINATION ${QT_PLUGINS_DIR}/gui_platform)

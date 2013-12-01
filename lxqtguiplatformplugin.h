@@ -27,15 +27,18 @@
 
 #include "qguiplatformplugin_p.h"
 #include <QtGlobal>
-#include <lxqt/LxQtSettings>
+//#include <lxqt/LxQtSettings>
 
 class LxQtGuiPlatformPlugin : public QGuiPlatformPlugin {
   Q_OBJECT
+private:
+  QString iconThemeName;
+
 public:
   explicit LxQtGuiPlatformPlugin();
   virtual ~LxQtGuiPlatformPlugin();
 
-  virtual QStringList keys() const { return QStringList() << QLatin1String("lxqt"); }
+  virtual QStringList keys() const { return QStringList() << QLatin1String("razorqt"); }
   virtual QString styleName();
   virtual QPalette palette();
   virtual QString systemIconThemeName();

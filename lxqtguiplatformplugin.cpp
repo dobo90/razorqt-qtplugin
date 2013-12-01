@@ -31,21 +31,33 @@
 #include <QFileInfo>
 #include <QApplication>
 #include <QWidget>
+#include <QFile>
+#include <QDir>
 
 Q_EXPORT_PLUGIN2(LxQtGuiPlatformPlugin, LxQtGuiPlatformPlugin)
 
 LxQtGuiPlatformPlugin::LxQtGuiPlatformPlugin() {
-  qDebug() << "LxQtGuiPlatformPlugin constructed";
+  /*qDebug() << "LxQtGuiPlatformPlugin constructed";
   connect(LxQt::Settings::globalSettings(), SIGNAL(iconThemeChanged()), SLOT(onIconThemeChanged()));
-  connect(LxQt::Settings::globalSettings(), SIGNAL(settingsChanged()), SLOT(onSettingsChanged()));
+  connect(LxQt::Settings::globalSettings(), SIGNAL(settingsChanged()), SLOT(onSettingsChanged()));*/
+ QFile file(QDir::homePath() + "/.razorqt_icontheme");
+  
+  if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qDebug() << "Couldn't open file ~/.razorqt_icontheme. Using default icon theme!";
+    iconThemeName = "";
+  }
+
+  QByteArray line = file.readLine();
+  iconThemeName = line.simplified();
 }
 
 LxQtGuiPlatformPlugin::~LxQtGuiPlatformPlugin() {
 }
 
 QString LxQtGuiPlatformPlugin::styleName() {
-  qDebug() << "LxQtGuiPlatformPlugin::styleName() is called";
-  return "fusion";
+  /*qDebug() << "LxQtGuiPlatformPlugin::styleName() is called";
+  return "fusion";*/
+  return QGuiPlatformPlugin::styleName();
 }
 
 QPalette LxQtGuiPlatformPlugin::palette() {
@@ -53,8 +65,9 @@ QPalette LxQtGuiPlatformPlugin::palette() {
 }
 
 QString LxQtGuiPlatformPlugin::systemIconThemeName() {
-  qDebug() << "LxQtGuiPlatformPlugin::systemIconThemeName() is called";
-  return LxQt::Settings::globalSettings()->value("icon_theme").toString();
+  /*qDebug() << "LxQtGuiPlatformPlugin::systemIconThemeName() is called";
+  return LxQt::Settings::globalSettings()->value("icon_theme").toString();*/
+  return iconThemeName;
 }
 
 /*
@@ -68,7 +81,7 @@ QStringList LxQtGuiPlatformPlugin::iconThemeSearchPaths() {
 */
 
 int LxQtGuiPlatformPlugin::platformHint(QGuiPlatformPlugin::PlatformHint hint) {
-  qDebug() << "LxQtGuiPlatformPlugin::platformHint() is called";
+  //qDebug() << "LxQtGuiPlatformPlugin::platformHint() is called";
   int ret = 0;
   switch(hint) {
     case PH_ToolButtonStyle:
